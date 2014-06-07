@@ -8,8 +8,6 @@ The shaders are detached and flagged for deletion after linking.
 
 ## Usage
 
-[![NPM](https://nodei.co/npm/webgl-compile-shader.png)](https://nodei.co/npm/webgl-compile-shader/)
-
 ```js
 var compiler = require('webgl-compile-shader');
 var program = compile({
