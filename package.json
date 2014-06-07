@@ -13,7 +13,7 @@
     "tape": "~2.13.2"
   },
   "scripts": {
-    "test": "browserify test.js | testling -x open"
+    "test-browser": "browserify test.js | testling -x open"
   },
   "repository": {
     "type": "git",
