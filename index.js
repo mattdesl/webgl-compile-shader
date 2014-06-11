@@ -11,11 +11,11 @@ module.exports = function(opts) {
     if (!gl) {
         gl = getGL(opts);
     }
-    return compile(gl, vertSource, fragSource, opts.verbose);
+    return compile(gl, vertSource, fragSource, opts.attributeLocations, opts.verbose);
 };
 
 //Compiles the shaders, throwing an error if the program was invalid.
-function compile(gl, vertSource, fragSource, verbose) {
+function compile(gl, vertSource, fragSource, attribs, verbose) {
     var log = "";
 
     var vert = loadShader(gl, gl.VERTEX_SHADER, vertSource, verbose);
@@ -31,10 +31,19 @@ function compile(gl, vertSource, fragSource, verbose) {
     gl.attachShader(program, vertShader);
     gl.attachShader(program, fragShader);
 
+    //TODO: Chrome seems a bit buggy with attribute bindings...
+    if (attribs) {
+        for (var key in attribs) {
+            if (attribs.hasOwnProperty(key)) {
+                gl.bindAttribLocation(program, Math.floor(attribs[key]), key);
+            }
+        }
+    }
+
     gl.linkProgram(program); 
 
     log += gl.getProgramInfoLog(program) || "";
-    
+
     gl.detachShader(program, vertShader);
     gl.detachShader(program, fragShader);
     gl.deleteShader(vertShader);
