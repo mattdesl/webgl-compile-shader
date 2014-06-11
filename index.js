@@ -2,7 +2,7 @@ var getGL = require('./getGL');
 
 module.exports = function(opts) {
     if (!opts || (!opts.vertex || !opts.fragment))
-        throw "must specify vertex and fragment source";
+        throw "must specify 'vertex' and 'fragment' source";
     var vertSource = (opts.vertex).trim();
     var fragSource = (opts.fragment).trim();
 
@@ -11,15 +11,15 @@ module.exports = function(opts) {
     if (!gl) {
         gl = getGL(opts);
     }
-    return compile(gl, vertSource, fragSource);
+    return compile(gl, vertSource, fragSource, opts.verbose);
 };
 
 //Compiles the shaders, throwing an error if the program was invalid.
-function compile(gl, vertSource, fragSource) {
+function compile(gl, vertSource, fragSource, verbose) {
     var log = "";
 
-    var vert = loadShader(gl, gl.VERTEX_SHADER, vertSource);
-    var frag = loadShader(gl, gl.FRAGMENT_SHADER, fragSource);
+    var vert = loadShader(gl, gl.VERTEX_SHADER, vertSource, verbose);
+    var frag = loadShader(gl, gl.FRAGMENT_SHADER, fragSource, verbose);
 
     var vertShader = vert.shader;
     var fragShader = frag.shader;
@@ -39,11 +39,14 @@ function compile(gl, vertSource, fragSource) {
     gl.detachShader(program, fragShader);
     gl.deleteShader(vertShader);
     gl.deleteShader(fragShader);
+    
 
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        throw new Error("Error linking the shader program:\n" + log+"\nVERTEX_SHADER:\n"
-                +addLineNumbers(vertSource) +"\n\nFRAGMENT_SHADER:\n"
-                +addLineNumbers(fragSource));
+        if (verbose)
+            console.warn("Problematic shaders:\nVERTEX_SHADER:\n"+addLineNumbers(vertSource)
+                    +"\n\nFRAGMENT_SHADER:\n"+addLineNumbers(fragSource));
+        throw new Error("Error linking the shader program:\n" + log);
+
     }
     return {
         program: program,
@@ -51,7 +54,7 @@ function compile(gl, vertSource, fragSource) {
     };
 }
 
-function loadShader(gl, type, source) {
+function loadShader(gl, type, source, verbose) {
     var shader = gl.createShader(type);
     if (!shader) //should not occur...
         return -1;
@@ -63,12 +66,14 @@ function loadShader(gl, type, source) {
     var typeStr = (type === gl.VERTEX_SHADER) ? "vertex" : "fragment";
 
     var logResult = gl.getShaderInfoLog(shader) || "";
-    if (logResult) {
-        logResult = "Error compiling "+ typeStr+ " shader:\n"+logResult+"\n"+addLineNumbers(source);
-    }
+    
 
+    //Chrome will just print "Uncaught error object" if the Error.message 
+    //is longer than 250 chars... WTF!
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS) ) {
-        throw new Error(logResult);
+        if (verbose)
+            console.warn( "Problematic shader:\n" + addLineNumbers(source) );
+        throw new Error("Could not compile shader:\n"+logResult);
     }
     if (!shader)
         throw new Error("gl.createShader returned 0 for "+typeStr+" shader.\n"+logResult);
