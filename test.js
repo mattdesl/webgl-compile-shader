@@ -24,6 +24,6 @@ test('compiles successfully', function(t) {
     t.throws(doCompileErr, 'compiles with error');
 
     //for this we need to use the same GL context!
-    t.ok( gl.isProgram(doCompile()), 'return value is a WebGLProgram object' );
+    t.ok( gl.isProgram(doCompile().program), 'return value is a WebGLProgram object' );
     t.end();
 });

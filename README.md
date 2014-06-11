@@ -10,12 +10,16 @@ The shaders are detached and flagged for deletion after linking.
 
 ```js
 var compiler = require('webgl-compile-shader');
-var program = compile({
+var info = compile({
 	gl: gl, //optional WebGL context, otherwise creates a dummy context
 	vertex: vertSource,
-	fragment: fragSource,
-	verbose: true, //spit out console warnings, default false
+	fragment: fragSource
 });
+
+//for dealing with the WebGL object
+var program = info.program;
+//for dealing with logging/warnings 
+var log = info.log;
 ```
 
 ## License
