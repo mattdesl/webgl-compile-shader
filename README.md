@@ -1,6 +1,7 @@
 [![browser support](https://ci.testling.com/mattdesl/webgl-compile-shader.png)](https://ci.testling.com/mattdesl/webgl-compile-shader)
 
-# webgl-compile-shader [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+# webgl-compile-shader 
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
 Compiles a WebGL shader program from the given vertex and fragment source. Throws an error on failure, providing clear logging with line numbers and the problematic shader (vertex vs. fragment). 
 
