@@ -1,6 +1,6 @@
 {
   "name": "webgl-compile-shader",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "test if a GLSL shader compiles",
   "main": "index.js",
   "license": "MIT",
