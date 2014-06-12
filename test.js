@@ -1,7 +1,7 @@
 var test = require('tape').test;
 var compiler = require('./');
 
-var gl = require('./getGL')();
+var gl = require('webgl-context')();
 
 function doCompile() {
     return compiler({
