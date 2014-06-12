@@ -1,4 +1,4 @@
-var getGL = require('./getGL');
+var getGL = require('webgl-context');
 
 module.exports = function(opts) {
     if (!opts || (!opts.vertex || !opts.fragment))
@@ -9,7 +9,9 @@ module.exports = function(opts) {
 
     var gl = opts.gl;
     if (!gl) {
-        gl = getGL(opts);
+        gl = getGL();
+        if (!gl)
+            throw new Error("WebGL not supported -- try another browser");
     }
     return compile(gl, vertSource, fragSource, opts.attributeLocations, opts.verbose);
 };

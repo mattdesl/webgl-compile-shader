@@ -1,14 +1,16 @@
 {
   "name": "webgl-compile-shader",
-  "version": "2.2.0",
-  "description": "test if a GLSL shader compiles",
+  "version": "2.3.0",
+  "description": "compiles a WebGL shader",
   "main": "index.js",
   "license": "MIT",
   "author": {
     "name": "Matt DesLauriers",
     "email": "dave.des@gmail.com"
   },
-  "dependencies": {},
+  "dependencies": {
+    "webgl-context": "~1.2.1"
+  },
   "devDependencies": {
     "tape": "~2.13.2"
   },
