@@ -50,6 +50,13 @@ function compile(gl, vertSource, fragSource, attribs, verbose) {
         if (verbose)
             console.warn("Problematic shaders:\nVERTEX_SHADER:\n"+addLineNumbers(vertSource)
                     +"\n\nFRAGMENT_SHADER:\n"+addLineNumbers(fragSource));
+
+        //delete before throwing error    
+        gl.detachShader(program, vertShader);
+        gl.detachShader(program, fragShader);
+        gl.deleteShader(vertShader);
+        gl.deleteShader(fragShader);
+        
         throw new Error("Error linking the shader program:\n" + log);
 
     }
