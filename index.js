@@ -46,12 +46,6 @@ function compile(gl, vertSource, fragSource, attribs, verbose) {
 
     log += gl.getProgramInfoLog(program) || "";
 
-    gl.detachShader(program, vertShader);
-    gl.detachShader(program, fragShader);
-    gl.deleteShader(vertShader);
-    gl.deleteShader(fragShader);
-    
-
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
         if (verbose)
             console.warn("Problematic shaders:\nVERTEX_SHADER:\n"+addLineNumbers(vertSource)
@@ -61,6 +55,8 @@ function compile(gl, vertSource, fragSource, attribs, verbose) {
     }
     return {
         program: program,
+        vertex: vertShader,
+        fragment: fragShader,
         log: log.trim()
     };
 }
