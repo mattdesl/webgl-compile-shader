@@ -5,7 +5,7 @@
 
 Compiles a WebGL shader program from the given vertex and fragment source. Throws an error on failure, providing clear logging with line numbers and the problematic shader (vertex vs. fragment). 
 
-The shaders are detached and flagged for deletion after linking.
+The shaders are *not* detached/deleted after link.
 
 ## Usage
 
@@ -25,6 +25,8 @@ var info = compile({
 var program = info.program;
 //for dealing with logging/warnings 
 var log = info.log;
+//vert and frag shader GL objects are also exported
+console.log(info.vertex, info.fragment);
 ```
 
 ## License
