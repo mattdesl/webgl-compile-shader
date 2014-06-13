@@ -1,6 +1,6 @@
 {
   "name": "webgl-compile-shader",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "compiles a WebGL shader",
   "main": "index.js",
   "license": "MIT",
