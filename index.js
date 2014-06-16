@@ -47,10 +47,11 @@ function compile(gl, vertSource, fragSource, attribs, verbose) {
     log += gl.getProgramInfoLog(program) || "";
 
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        if (verbose)
-            console.warn("Problematic shaders:\nVERTEX_SHADER:\n"+addLineNumbers(vertSource)
+        if (verbose) {
+            console.error("Shader error:\n"+log);
+            console.error("Problematic shaders:\nVERTEX_SHADER:\n"+addLineNumbers(vertSource)
                     +"\n\nFRAGMENT_SHADER:\n"+addLineNumbers(fragSource));
-
+        }
         //delete before throwing error    
         gl.detachShader(program, vertShader);
         gl.detachShader(program, fragShader);
@@ -85,8 +86,10 @@ function loadShader(gl, type, source, verbose) {
     //Chrome will just print "Uncaught error object" if the Error.message 
     //is longer than 250 chars... WTF!
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS) ) {
-        if (verbose)
-            console.warn( "Problematic "+typeStr+" shader:\n" + addLineNumbers(source) );
+        if (verbose) {
+            console.error("Shader error:\n"+log);
+            console.error( "Problematic "+typeStr+" shader:\n" + addLineNumbers(source) );
+        }
         throw new Error("Could not compile "+typeStr+" shader:\n"+logResult);
     }
     if (!shader)
