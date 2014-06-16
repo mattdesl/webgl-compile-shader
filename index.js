@@ -87,7 +87,7 @@ function loadShader(gl, type, source, verbose) {
     //is longer than 250 chars... WTF!
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS) ) {
         if (verbose) {
-            console.error("Shader error:\n"+log);
+            console.error("Shader error:\n"+logResult);
             console.error( "Problematic "+typeStr+" shader:\n" + addLineNumbers(source) );
         }
         throw new Error("Could not compile "+typeStr+" shader:\n"+logResult);
