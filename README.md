@@ -3,7 +3,7 @@
 
 Compiles a WebGL shader program from the given vertex and fragment source. Throws an error on failure, providing clear logging with line numbers and the problematic shader (vertex vs. fragment). 
 
-The shaders are *not* detached/deleted after link.
+The shaders are *not* detached/deleted after link, as this was causing issues with Chrome's WebGLInspector.
 
 ## Usage
 
