@@ -4,10 +4,7 @@
   "description": "compiles a WebGL shader",
   "main": "index.js",
   "license": "MIT",
-  "author": {
-    "name": "Matt DesLauriers",
-    "email": "dave.des@gmail.com"
-  },
+  "author": "Matt DesLauriers <dave.des@gmail.com>",
   "dependencies": {
     "webgl-context": "~1.2.1"
   },
@@ -21,9 +18,6 @@
     "type": "git",
     "url": "git://github.com/mattdesl/webgl-compile-shader.git"
   },
-  "keywords": [
-    "glsl glslify test shader compile webgl opengl link"
-  ],
   "homepage": "https://github.com/mattdesl/webgl-compile-shader",
   "bugs": {
     "url": "https://github.com/mattdesl/webgl-compile-shader/issues"
@@ -43,5 +37,16 @@
       "iphone/6.0..latest",
       "android-browser/4.2..latest"
     ]
-  }
+  },
+  "keywords": [
+    "webgl",
+    "glsl",
+    "glsles",
+    "glslify",
+    "compile",
+    "shader",
+    "program",
+    "opengl",
+    "link"
+  ]
 }
