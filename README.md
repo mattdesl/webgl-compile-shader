@@ -1,5 +1,3 @@
-[![browser support](https://ci.testling.com/mattdesl/webgl-compile-shader.png)](https://ci.testling.com/mattdesl/webgl-compile-shader)
-
 # webgl-compile-shader 
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
